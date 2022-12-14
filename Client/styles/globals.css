@@ -9,3 +9,23 @@
 body {
   font-family: "Noto Sans", sans-serif;
 }
+.flex {
+  display: flex;
+}
+.slick-dots button:before {
+  color: White !important;
+}
+.slick-next {
+  margin-right: 22%;
+}
+.slick-prev {
+  margin-left: 21%;
+  z-index: 999;
+}
+.slick-dots {
+  height: 50px;
+}
+.slick-current #watchNowBtn,
+.slick-current #coverImg {
+  display: flex;
+}
