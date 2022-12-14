@@ -84,7 +84,7 @@ function CustomImage({ coverUrl, listUrl, id }) {
       src={src}
       width="321"
       height="482"
-      alt=""
+      alt="."
       onError={() => {
         countRef.current = countRef.current++;
         if (countRef.current > 2) {
