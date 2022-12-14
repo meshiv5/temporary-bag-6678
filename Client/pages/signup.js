@@ -155,7 +155,7 @@ export default function Signup() {
                     />
                     <FormErrorMessage>{errors.pic}</FormErrorMessage>
                   </FormControl>
-                <Button type="submit"colorScheme={"purple"} color="white" width="full">
+                <Button type="submit" colorScheme={"purple"} color="white" width="full">
                   Signup
                 </Button>
               </VStack>
