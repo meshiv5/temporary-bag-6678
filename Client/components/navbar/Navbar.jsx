@@ -34,15 +34,7 @@ function Navbar({size,handleAuth,isAuth}) {
   if (size < 1800) x = 5;
   if (size < 1360) x = 3;
 
-  useEffect(()=>{
-    handleAuth();
-    // localStorage.setItem(
-    //   "token",
-    //   JSON.stringify(
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoia2FyciIsImVtYWlsIjoia0BnbWFpbC5jb20iLCJwaWMiOiJodHRwczovL2VuY3J5cHRlZC10Ym4wLmdzdGF0aWMuY29tL2ltYWdlcz9xPXRibjpBTmQ5R2NUeHNndEpnbzRzTDI5VFRnUGtZT1E5SUV1Q1JDWGJsTUJiaFZVeGQ1U0JyZyZzIiwidXNlciI6InVzZXIiLCJpYXQiOjE2NzExMDY1NTJ9.tkCBQOxkS6hUHgQiYchvJH-TXF2kiGCBItEaSgX1BJo"
-    //   )
-    // );
-  },[])
+  useEffect(()=>handleAuth(),[])
   return (
     <Container
       zIndex={1}
