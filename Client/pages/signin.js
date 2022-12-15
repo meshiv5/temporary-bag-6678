@@ -124,7 +124,6 @@ export default function Signup() {
                   </FormControl>
                   <FormControl isInvalid={!!errors.password && touched.password}>
                     <FormLabel htmlFor="password">Password</FormLabel>
-<<<<<<< HEAD
                     <Field
                       as={Input}
                       id="password"
@@ -145,13 +144,6 @@ export default function Signup() {
                     color="white"
                     width="full"
                   >
-=======
-                    <Field as={Input} id="password" name="password" type="password" variant="filled" />
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
-                  </FormControl>
-
-                  <Button type="submit" colorScheme={"purple"} color="white" width="full">
->>>>>>> main
                     Signin
                   </Button>
                 </VStack>
