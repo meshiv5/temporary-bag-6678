@@ -1,11 +1,14 @@
 import { Box, Text, Button, FormControl, FormErrorMessage, FormLabel, Input, Flex, VStack, useToast, Link } from "@chakra-ui/react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { Field, Form, Formik } from "formik";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 export default function Signup() {
   const toast = useToast();
+  const router = useRouter();
   const handleSignup = async (val) => {
+    console.log(val);
     try {
       let data = await axios.post("http://localhost:8080/user/signin", val);
       console.log(data.data);
@@ -17,6 +20,7 @@ export default function Signup() {
         duration: 9000,
         isClosable: true,
       });
+      router.replace('/')
     } catch (err) {
       toast({
         title: err.response.data,
@@ -29,23 +33,55 @@ export default function Signup() {
     }
   };
   return (
-    <Box>
+    <Box color="#ffffff">
       <Text textAlign={"right"} mr="30px" mt="30px" fontWeight="bold">
         <Link href="/">X</Link>
       </Text>
-      <Box w={{ base: "80%", sm: "60%", md: "40%" }} textAlign={"center"} m="auto">
-        <Text>Login to ZEE5</Text>
-        <Text>Login to continue enjoying uninterrupted video and personalised experience.</Text>
+      <Box
+        w={{ base: "80%", sm: "60%", md: "40%" }}
+        textAlign={"center"}
+        m="auto"
+      >
+        <Text fontSize={"2xl"} fontWeight="bold">
+          Login to ZEE5
+        </Text>
+        <Text w={{ base: "80%", sm: "60%" }} m="auto" my={"20px"}>
+          Login to continue enjoying uninterrupted video and personalised
+          experience.
+        </Text>
 
         <Flex mt="20px" justifyContent={"center"}>
           <Link href="http://localhost:8080/auth/google">
-            <FcGoogle style={{ marginRight: "30px", fontSize: "50px" }} />
+            <FcGoogle
+              style={{
+                marginLeft: "20px",
+                marginRight: "30px",
+                fontSize: "40px",
+              }}
+            />
           </Link>
-          <FaGithub style={{ marginRight: "30px", fontSize: "50px" }} />
-          <FaTwitter style={{ marginRight: "30px", fontSize: "50px" }} />
+          <Link href="http://localhost:8080/auth/github">
+            <FaGithub
+              style={{
+                marginRight: "30px",
+                fontSize: "40px",
+                color: "#ffffff",
+              }}
+            />
+          </Link>
+          <FaTwitter
+            style={{ marginRight: "30px", fontSize: "40px", color: "#00acee" }}
+          />
         </Flex>
 
-        <Text w="60px" m="auto" my="20px" fontWeight={"bold"} fontSize="30px" border="2px solid black" borderRadius={"50%"}>
+        <Text
+          w="60px"
+          m="auto"
+          pr="10px"
+          my="20px"
+          fontWeight={"bold"}
+          fontSize="30px"
+        >
           OR
         </Text>
 
@@ -68,7 +104,11 @@ export default function Signup() {
                       as={Input}
                       id="email"
                       name="email"
+                      color="black"
                       type="email"
+                      _hover={{
+                        color: "white",
+                      }}
                       variant="filled"
                       validate={(value) => {
                         let error;
@@ -84,11 +124,34 @@ export default function Signup() {
                   </FormControl>
                   <FormControl isInvalid={!!errors.password && touched.password}>
                     <FormLabel htmlFor="password">Password</FormLabel>
+<<<<<<< HEAD
+                    <Field
+                      as={Input}
+                      id="password"
+                      color="black"
+                      name="password"
+                      type="password"
+                      _hover={{
+                        color: "white",
+                      }}
+                      variant="filled"
+                    />
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  </FormControl>
+
+                  <Button
+                    type="submit"
+                    background={"#8230c6"}
+                    color="white"
+                    width="full"
+                  >
+=======
                     <Field as={Input} id="password" name="password" type="password" variant="filled" />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
 
                   <Button type="submit" colorScheme={"purple"} color="white" width="full">
+>>>>>>> main
                     Signin
                   </Button>
                 </VStack>
