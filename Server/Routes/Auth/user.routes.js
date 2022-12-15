@@ -50,6 +50,7 @@ server.post("/signin", async (req, res) => {
             name: user.name,
             email,
             pic: user.pic,
+            user:user.user
           };
 
           const token = await jwt.sign(data, process.env.JWT_SECRET);

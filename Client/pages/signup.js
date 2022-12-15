@@ -26,7 +26,7 @@ export default function Signup() {
       console.log(res.data);
       toast({
         title: res.data,
-        description: "We've created your account for you.",
+        description: "redirecting to login page",
         status: 'success',
         duration: 9000,
         isClosable: true,
@@ -35,17 +35,17 @@ export default function Signup() {
     }
     catch(err){
       toast({
-        title: err.response.data,
+        title:  "Please Enter Correct Details",
         description: "Something went wrong.",
         status: 'error',
         duration: 9000,
         isClosable: true,
       })
-      console.log(err.response.data)
+      console.log( err)
     }
   };
   return (
-    <Box color="#ffffff">
+    <Box mb="50px" color="#ffffff">
       <Text textAlign={"right"} mr="30px" mt="30px" fontWeight="bold">
        <Link href="/">X</Link>
       </Text>
@@ -64,7 +64,6 @@ export default function Signup() {
         <Flex mt="20px" justifyContent={"center"}>
           <Link href="http://localhost:8080/auth/google"><FcGoogle style={{ marginRight: "30px", fontSize: "40px" }} /></Link>
           <Link href="http://localhost:8080/auth/github"><FaGithub style={{ marginRight: "30px", fontSize: "40px", color:"#ffffff" }} /></Link>
-          <FaTwitter style={{ marginRight: "30px", fontSize: "40px" }} />
         </Flex>
         <Text  w="60px" m="auto" pr="15px" my="20px"fontWeight={"bold"} fontSize="30px">OR</Text>
 
@@ -188,6 +187,7 @@ export default function Signup() {
         </Formik> 
         </Box>
       </Box>
+      <Text m="20px" textAlign={"center"}>If You already registred Please <Link color="lightblue" href="/signin">Login</Link></Text>
     </Box>
   );
 }

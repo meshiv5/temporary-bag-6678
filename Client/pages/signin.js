@@ -4,7 +4,24 @@ import { useRouter } from "next/router";
 import { Field, Form, Formik } from "formik";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub, FaTwitter } from "react-icons/fa";
+import jwt_decode from 'jwt-decode';
 export default function Signup() {
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    const item = localStorage.getItem('token')
+    let bag = "";
+    for(let i=0;i<item.length;i++){
+      if(i===0 || i === item.length-1){
+        continue;
+      }
+      else bag+=item[i];
+    }
+    // console.log(bag);
+    var decoded = jwt_decode(bag);
+console.log(decoded);
+  }
+
+
   const toast = useToast();
   const router = useRouter();
   const handleSignup = async (val) => {
@@ -14,7 +31,7 @@ export default function Signup() {
       console.log(data.data);
       localStorage.setItem("token", JSON.stringify(data.data));
       toast({
-        title: "Redirecting.....",
+        title: "Redirecting.....Homepage",
         description: "user Successfully loged in",
         status: "success",
         duration: 9000,
@@ -23,17 +40,17 @@ export default function Signup() {
       router.replace('/')
     } catch (err) {
       toast({
-        title: err.response.data,
+        title: "Please Enter Correct Details",
         description: "Something went wrong.",
         status: "error",
         duration: 9000,
         isClosable: true,
       });
-      console.log(err.response.data);
+      console.log(err);
     }
   };
   return (
-    <Box color="#ffffff">
+    <Box mb="50px" color="#ffffff">
       <Text textAlign={"right"} mr="30px" mt="30px" fontWeight="bold">
         <Link href="/">X</Link>
       </Text>
@@ -69,9 +86,7 @@ export default function Signup() {
               }}
             />
           </Link>
-          <FaTwitter
-            style={{ marginRight: "30px", fontSize: "40px", color: "#00acee" }}
-          />
+          
         </Flex>
 
         <Text
@@ -124,7 +139,7 @@ export default function Signup() {
                   </FormControl>
                   <FormControl isInvalid={!!errors.password && touched.password}>
                     <FormLabel htmlFor="password">Password</FormLabel>
-<<<<<<< HEAD
+
                     <Field
                       as={Input}
                       id="password"
@@ -145,13 +160,6 @@ export default function Signup() {
                     color="white"
                     width="full"
                   >
-=======
-                    <Field as={Input} id="password" name="password" type="password" variant="filled" />
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
-                  </FormControl>
-
-                  <Button type="submit" colorScheme={"purple"} color="white" width="full">
->>>>>>> main
                     Signin
                   </Button>
                 </VStack>
@@ -160,8 +168,8 @@ export default function Signup() {
           </Formik>
         </Box>
       </Box>
+      <Text m="20px" textAlign={"center"}>If You're not registred Please <Link color="lightblue" href="/signup">Signup</Link></Text>
     </Box>
   );
 }
-
 
