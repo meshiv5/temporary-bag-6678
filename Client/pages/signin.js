@@ -1,16 +1,4 @@
-import {
-  Box,
-  Text,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  Flex,
-  VStack,
-  useToast,
-  Link,
-} from "@chakra-ui/react";
+import { Box, Text, Button, FormControl, FormErrorMessage, FormLabel, Input, Flex, VStack, useToast, Link } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Field, Form, Formik } from "formik";
@@ -134,10 +122,9 @@ export default function Signup() {
                     />
                     <FormErrorMessage>{errors.email}</FormErrorMessage>
                   </FormControl>
-                  <FormControl
-                    isInvalid={!!errors.password && touched.password}
-                  >
+                  <FormControl isInvalid={!!errors.password && touched.password}>
                     <FormLabel htmlFor="password">Password</FormLabel>
+<<<<<<< HEAD
                     <Field
                       as={Input}
                       id="password"
@@ -158,6 +145,13 @@ export default function Signup() {
                     color="white"
                     width="full"
                   >
+=======
+                    <Field as={Input} id="password" name="password" type="password" variant="filled" />
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  </FormControl>
+
+                  <Button type="submit" colorScheme={"purple"} color="white" width="full">
+>>>>>>> main
                     Signin
                   </Button>
                 </VStack>
@@ -169,3 +163,5 @@ export default function Signup() {
     </Box>
   );
 }
+
+
