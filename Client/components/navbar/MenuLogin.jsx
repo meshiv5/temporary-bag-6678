@@ -5,7 +5,7 @@ export default function MenuLogin() {
   return (
     <Box my="20px">
       <Button mr="20px" variant="outline">
-        <Link href="/login">Login</Link>
+        <Link href="/signin">Login</Link>
       </Button>
       <Button ml="20px" bg="purple">
         <Link href="/signup">Sign up for FREE</Link>

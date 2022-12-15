@@ -1,9 +1,21 @@
-import { Box, Text, Button, FormControl, FormErrorMessage, FormLabel, Input, Flex, VStack, useToast, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Flex,
+  VStack,
+  useToast,
+  Link,
+} from "@chakra-ui/react";
 import axios from "axios";
-import { useRouter } from "next/router";
-import { Field, Form, Formik } from "formik";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaTwitter } from "react-icons/fa";
+import {useRouter} from "next/router";
+import {Field, Form, Formik} from "formik";
+import {FcGoogle} from "react-icons/fc";
+import {FaGithub, FaTwitter} from "react-icons/fa";
 export default function Signup() {
   const toast = useToast();
   const router = useRouter();
@@ -20,7 +32,7 @@ export default function Signup() {
         duration: 9000,
         isClosable: true,
       });
-      router.replace('/')
+      router.replace("/");
     } catch (err) {
       toast({
         title: err.response.data,
@@ -38,14 +50,14 @@ export default function Signup() {
         <Link href="/">X</Link>
       </Text>
       <Box
-        w={{ base: "80%", sm: "60%", md: "40%" }}
+        w={{base: "80%", sm: "60%", md: "40%"}}
         textAlign={"center"}
         m="auto"
       >
         <Text fontSize={"2xl"} fontWeight="bold">
           Login to ZEE5
         </Text>
-        <Text w={{ base: "80%", sm: "60%" }} m="auto" my={"20px"}>
+        <Text w={{base: "80%", sm: "60%"}} m="auto" my={"20px"}>
           Login to continue enjoying uninterrupted video and personalised
           experience.
         </Text>
@@ -70,7 +82,7 @@ export default function Signup() {
             />
           </Link>
           <FaTwitter
-            style={{ marginRight: "30px", fontSize: "40px", color: "#00acee" }}
+            style={{marginRight: "30px", fontSize: "40px", color: "#00acee"}}
           />
         </Flex>
 
@@ -95,7 +107,7 @@ export default function Signup() {
               handleSignup(values);
             }}
           >
-            {({ handleSubmit, errors, touched }) => (
+            {({handleSubmit, errors, touched}) => (
               <form onSubmit={handleSubmit}>
                 <VStack spacing={4} align="flex-start">
                   <FormControl isInvalid={!!errors.email && touched.email}>
@@ -122,7 +134,9 @@ export default function Signup() {
                     />
                     <FormErrorMessage>{errors.email}</FormErrorMessage>
                   </FormControl>
-                  <FormControl isInvalid={!!errors.password && touched.password}>
+                  <FormControl
+                    isInvalid={!!errors.password && touched.password}
+                  >
                     <FormLabel htmlFor="password">Password</FormLabel>
                     <Field
                       as={Input}
@@ -155,5 +169,3 @@ export default function Signup() {
     </Box>
   );
 }
-
-
