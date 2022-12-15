@@ -8,7 +8,6 @@ import {
   Button,
   Container,
   Flex,
-  Img,
   Input,
   ListItem,
   Menu,
@@ -19,21 +18,26 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
-import { plans, settings, categories, info} from "../data";
+import {plans, settings, categories, info} from "../data";
 import {CgMenuGridR} from "react-icons/cg";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {FaCrown} from "react-icons/fa";
 import {BiSearch} from "react-icons/bi";
 import ZeeLogo from "./ZeeLogo";
 import MenuLogin from "./MenuLogin";
+import Profile from "./Profile";
+import { useEffect } from "react";
 
-function Navbar({size}) {
+function Navbar({size,handleAuth,isAuth}) {
   const checkRoute = useRouter();
   let x = 9;
   if (size < 1800) x = 5;
   if (size < 1360) x = 3;
+
+  useEffect(()=>handleAuth(),[])
   return (
     <Container
+      zIndex={1}
       fontFamily="sans-serif"
       color="white"
       bg="black"
@@ -42,13 +46,8 @@ function Navbar({size}) {
       top="0px"
       p="0px"
     >
-      <Flex
-        justifyContent="space-between"
-        p="30px"
-        w="full"
-        border="1px solid black"
-      >
-        <Box display="flex" border="1px solid black">
+      <Flex justifyContent="space-between" p="30px" w="full">
+        <Box display="flex">
           <ZeeLogo />
           <Box display="flex" alignItems="center">
             {size < 1200 && size > 900 && (
@@ -134,7 +133,7 @@ function Navbar({size}) {
                 <MenuButton>
                   <CgMenuGridR style={{width: "50px", height: "30px"}} />
                 </MenuButton>
-                <MenuList mt="30px" border="1px solid black" bg="black">
+                <MenuList mt="30px" bg="black">
                   {categories
                     .filter((ele, i) => i >= x)
                     .map((ele, i) => (
@@ -157,7 +156,7 @@ function Navbar({size}) {
           justifyContent="end"
           alignItems="center"
           w="700px"
-          border="1px solid black"
+          gap="3%"
         >
           {size > 1200 && (
             <Flex
@@ -180,13 +179,16 @@ function Navbar({size}) {
               <BiSearch style={{width: "30px", height: "30px"}} />
             </Link>
           )}
-          {size > 1200 && (
-            <Button mx="15px" w="100px" colorScheme="black" variant="outline">
-              <Link href="/signin">Login</Link>
-            </Button>
-          )}
+          {size > 1200 &&
+            (!isAuth ? (
+              <Button w="100px" colorScheme="black" variant="outline">
+                <Link href="/signin">Login</Link>
+              </Button>
+            ) : (
+              <Profile handleAuth={handleAuth} />
+            ))}
           {size > 900 && (
-            <Button w="140px" mx="20px" colorScheme="purple">
+            <Button w="140px" colorScheme="purple">
               <FaCrown
                 style={{marginRight: "10px", background: "transparent"}}
               />
@@ -198,24 +200,27 @@ function Navbar({size}) {
               <GiHamburgerMenu style={{width: "50px", height: "30px"}} />
             </MenuButton>
             <MenuList
-              border="1px solid black"
               mt="30px"
               w={{base: "100vw", lg: "400px"}}
               bg="black"
               maxH="80vh"
               overflow="scroll"
             >
-              {size<1200 && <Flex justifyContent="center">
-                <ZeeLogo />
-              </Flex>}
-              {size<1200 && <Flex justifyContent="center">
-                <MenuLogin/>
-              </Flex>}
-              <MenuItem pl="15px" bg="black">
-                Home
+              {size < 1200 && (
+                <Flex justifyContent="center">
+                  <ZeeLogo />
+                </Flex>
+              )}
+              {size < 1200 && !isAuth && (
+                <Flex justifyContent="center">
+                  <MenuLogin />
+                </Flex>
+              )}
+              <MenuItem _hover={{color:"purple"}} pl="15px" bg="black">
+                <Link href="/">Home</Link>
               </MenuItem>
               <Accordion defaultIndex={[0]} allowMultiple>
-                <AccordionItem border="1px solid black">
+                <AccordionItem>
                   <h2>
                     <AccordionButton>
                       <Box as="span" flex="1" textAlign="left">
@@ -235,7 +240,7 @@ function Navbar({size}) {
                     </AccordionPanel>
                   ))}
                 </AccordionItem>
-                <AccordionItem border="1px solid black">
+                <AccordionItem>
                   <h2>
                     <AccordionButton>
                       <Box as="span" flex="1" textAlign="left">
@@ -255,7 +260,7 @@ function Navbar({size}) {
                     </AccordionPanel>
                   ))}
                 </AccordionItem>
-                <AccordionItem border="1px solid black">
+                <AccordionItem>
                   <h2>
                     <AccordionButton>
                       <Box as="span" flex="1" textAlign="left">
@@ -275,7 +280,7 @@ function Navbar({size}) {
                     </AccordionPanel>
                   ))}
                 </AccordionItem>
-                <AccordionItem border="1px solid black">
+                <AccordionItem>
                   <h2>
                     <AccordionButton>
                       <Box as="span" flex="1" textAlign="left">
