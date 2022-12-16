@@ -6,8 +6,10 @@ import styles from "../styles/Home/Carousel.module.css";
 import Image from "next/image";
 import { BsPlayFill } from "react-icons/bs";
 import createCoverUrl from "../utils/createCoverUrl";
+import { useRouter } from "next/router";
 
-export default function Carousel({ carouselData }) {
+export default function Carousel({ carouselData, queryPart, SamePage }) {
+  const router = useRouter();
   const settings = {
     dots: true,
     speed: 500,
@@ -45,7 +47,19 @@ export default function Carousel({ carouselData }) {
         let coverUrl = createCoverUrl(item.image_url.cover, id, 1200, 555);
         let originalTitle = item.original_title;
         return (
-          <div key={item.id}>
+          <div
+            onClick={() => {
+              if (SamePage) {
+                let asPath = router.asPath.split("/");
+                asPath.pop();
+                asPath = asPath.join("/");
+                router.push({
+                  pathname: asPath + `/${item.id}`,
+                });
+              } else router.push(`${queryPart}/${item.id}`);
+            }}
+            key={item.id}
+          >
             <h3 id="coverImg" className={styles.originalTitle}>
               {originalTitle}
             </h3>

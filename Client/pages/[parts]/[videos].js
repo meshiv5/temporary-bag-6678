@@ -4,8 +4,10 @@ import getHomePageData from "../../utils/getHomePageData";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
 import Loading from "./loading";
+import MoviePlayer from "../../components/MoviePlayer";
 const axios = require("axios");
-export default function Parts({ carouselData, buckets, queryPart }) {
+
+export default function Videos({ carouselData, buckets, queryPart }) {
   const [bucketsData, setBucketsData] = useState([...buckets]);
   const [currPage, setCurrPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -31,7 +33,7 @@ export default function Parts({ carouselData, buckets, queryPart }) {
   };
   return (
     <div>
-      <Carousel carouselData={carouselData} queryPart={queryPart} />
+      <MoviePlayer queryPart={queryPart} />
       <InfiniteScroll
         dataLength={bucketsData.length}
         next={() => {
@@ -42,15 +44,15 @@ export default function Parts({ carouselData, buckets, queryPart }) {
         endMessage={<h4>Nothing more to show</h4>}
       >
         {bucketsData.map((bucket) => {
-          return <Section key={bucket.id + Math.random() * 100} sectionData={bucket} queryPart={queryPart} />;
+          return <Section key={bucket.id + Math.random() * 100} sectionData={bucket} queryPart={queryPart} SamePage={true} />;
         })}
       </InfiniteScroll>
     </div>
   );
 }
-
 export async function getServerSideProps({ query }) {
   let queryPart = query.parts;
+  let queryVideo = query.videos;
   if (queryPart) {
     try {
       const resp = await getHomePageData(queryPart);
