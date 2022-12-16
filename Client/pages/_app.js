@@ -15,8 +15,8 @@ function MyApp({ Component, pageProps }) {
     useEffect(() => (window.onresize = updateSize), []);
   return (
     <ChakraProvider>
-      <Navbar size={size} isAuth={isAuth} handleAuth={handleAuth}/>
-      <Component {...pageProps} />
+      <Navbar size={size} isAuth={isAuth} handleAuth={handleAuth} />
+      <Component {...pageProps} handleAuth={handleAuth} />
       <Footer size={size} />
     </ChakraProvider>
   );
