@@ -12,58 +12,68 @@ import {
   Link,
 } from "@chakra-ui/react";
 import axios from "axios";
-import {useRouter} from "next/router";
-import {Field, Form, Formik} from "formik";
-import {FcGoogle} from "react-icons/fc";
-import {FaGithub, FaTwitter} from "react-icons/fa";
+import { useRouter } from "next/router";
+import { Field, Form, Formik } from "formik";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import { useState } from "react";
+import jwt_decode from "jwt-decode";
+
 export default function Signup() {
   const toast = useToast();
   const router = useRouter();
-  const handleSignup = async (val) => {
+
+  const handleSignin = async (val) => {
     console.log(val);
     try {
-      let data = await axios.post("http://localhost:8080/user/signin", val);
-      console.log(data.data);
-      localStorage.setItem("token", JSON.stringify(data.data));
+      let res = await axios.post(`https://zee5.cyclic.app/user/signin`, val);
+     let data = res.data;
+     console.log(res.data);
+      localStorage.setItem("token",JSON.stringify(data));
       toast({
-        title: "Redirecting.....",
+        title: "Redirecting.....Homepage",
         description: "user Successfully loged in",
         status: "success",
         duration: 9000,
         isClosable: true,
       });
-      router.replace("/");
+      const decoded = jwt_decode(data);
+      if (decoded.user === "admin") {
+        router.replace("/admin");
+      } else {
+        router.replace("/");
+      }
     } catch (err) {
       toast({
-        title: err.response.data,
+        title: "Please Enter Correct Details",
         description: "Something went wrong.",
         status: "error",
         duration: 9000,
         isClosable: true,
       });
-      console.log(err.response.data);
+      console.log(err);
     }
   };
   return (
-    <Box color="#ffffff">
+    <Box mb="50px" color="#ffffff">
       <Text textAlign={"right"} mr="30px" mt="30px" fontWeight="bold">
         <Link href="/">X</Link>
       </Text>
       <Box
-        w={{base: "80%", sm: "60%", md: "40%"}}
+        w={{ base: "80%", sm: "60%", md: "40%" }}
         textAlign={"center"}
         m="auto"
       >
         <Text fontSize={"2xl"} fontWeight="bold">
           Login to ZEE5
         </Text>
-        <Text w={{base: "80%", sm: "60%"}} m="auto" my={"20px"}>
+        <Text w={{ base: "80%", sm: "60%" }} m="auto" my={"20px"}>
           Login to continue enjoying uninterrupted video and personalised
           experience.
         </Text>
 
         <Flex mt="20px" justifyContent={"center"}>
-          <Link href="http://localhost:8080/auth/google">
+          <Link href={`https://zee5.cyclic.app/auth/google`}>
             <FcGoogle
               style={{
                 marginLeft: "20px",
@@ -72,7 +82,7 @@ export default function Signup() {
               }}
             />
           </Link>
-          <Link href="http://localhost:8080/auth/github">
+          <Link href="https://zee5.cyclic.app/auth/github">
             <FaGithub
               style={{
                 marginRight: "30px",
@@ -81,9 +91,6 @@ export default function Signup() {
               }}
             />
           </Link>
-          <FaTwitter
-            style={{marginRight: "30px", fontSize: "40px", color: "#00acee"}}
-          />
         </Flex>
 
         <Text
@@ -104,10 +111,10 @@ export default function Signup() {
               password: "",
             }}
             onSubmit={(values) => {
-              handleSignup(values);
+              handleSignin(values);
             }}
           >
-            {({handleSubmit, errors, touched}) => (
+            {({ handleSubmit, errors, touched }) => (
               <form onSubmit={handleSubmit}>
                 <VStack spacing={4} align="flex-start">
                   <FormControl isInvalid={!!errors.email && touched.email}>
@@ -137,7 +144,7 @@ export default function Signup() {
                   <FormControl
                     isInvalid={!!errors.password && touched.password}
                   >
-                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <FormLabel htmlFor="password">Password</FormLabel>{" "}
                     <Field
                       as={Input}
                       id="password"
@@ -166,6 +173,12 @@ export default function Signup() {
           </Formik>
         </Box>
       </Box>
+      <Text m="20px" textAlign={"center"}>
+        If You're not registred Please{" "}
+        <Link color="lightblue" href="/signup">
+           Signup
+        </Link>
+      </Text>
     </Box>
   );
 }

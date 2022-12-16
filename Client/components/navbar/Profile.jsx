@@ -1,16 +1,19 @@
 import {Avatar, Button, Popover, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Text, WrapItem} from "@chakra-ui/react";
 import { useEffect } from "react";
 import jwt from "jsonwebtoken"
+import cookie from "js-cookie";
 import { useState } from "react";
 export default function Profile({handleAuth}) {
     const [details,setDetails] = useState({name:"",email:"",pic:""})
     useEffect(()=>{
         const token = JSON.parse(localStorage.getItem("token"))
         const details = jwt.decode(token)
-        setDetails(details)
+          setDetails(details)
     },[])
     const handleClick =()=>{
+      cookie.remove("TOKEN");
         localStorage.removeItem("token");
+
         handleAuth()
     }
   return (
@@ -18,7 +21,7 @@ export default function Profile({handleAuth}) {
       <PopoverTrigger>
         <Button w="40px" borderRadius="50%">
           <WrapItem>
-            <Avatar name="Dan Abrahmov" src={details.pic}/>
+            <Avatar src={details.pic}/>
           </WrapItem>
         </Button>
       </PopoverTrigger>

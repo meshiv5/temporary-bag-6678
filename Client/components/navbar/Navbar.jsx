@@ -15,8 +15,8 @@ import {
   MenuItem,
   MenuList,
   UnorderedList,
+  Link
 } from "@chakra-ui/react";
-import Link from "next/link";
 import {useRouter} from "next/router";
 import {plans, settings, categories, info} from "../data";
 import {CgMenuGridR} from "react-icons/cg";

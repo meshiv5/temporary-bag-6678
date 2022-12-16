@@ -1,4 +1,5 @@
 import {
+  Image,
   Box,
   Table,
   TableCaption,
@@ -24,15 +25,18 @@ import {
 } from "@chakra-ui/react";
 import { BiLinkExternal } from "react-icons/bi";
 import axios from "axios";
+import  jwt from "jsonwebtoken";
 import Navbar from "../../components/adminNav";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 export default function admin() {
+  const router = useRouter();
   const toast = useToast();
   const [userData, setUserdata] = useState({});
   const [data, setData] = useState([]);
+  const [admin, setAdmin] = useState({});
   const [state, setState] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const handleUser = (user) => {
     // console.log(user);
     setUserdata(user);
@@ -40,18 +44,17 @@ export default function admin() {
   const getData = async () => {
     try {
       const res = await axios
-        .get(`http://localhost:8080/user`)
+        .get(`https://zee5.cyclic.app/user`)
         .then((res) => setData(res.data))
         .catch((err) => console.log(err));
     } catch (err) {
       console.log(err.message);
     }
-    
   };
   const handleDelete = async (id) => {
     setState(!state);
     try {
-      let res = await axios.delete(`http://localhost:8080/user/${id}`);
+      let res = await axios.delete(`https://zee5.cyclic.app/user/${id}`);
       toast({
         title: "User Deleted Successfully",
         status: "success",
@@ -62,16 +65,28 @@ export default function admin() {
     } catch (e) {
       console.log(e.message);
     }
+    getData();
   };
 
   useEffect(() => {
-    getData()
+    let toke = JSON.parse(localStorage.getItem("token"))||"";
+    if (toke.length > 1) {
+      const details = jwt.decode(toke);
+      console.log(details)
+      if (details.user==="user" || details.user!=="admin") router.replace("/");
+      setAdmin(details)
+       
+    }else{
+      router.replace("/");
+    }
+    getData();
   }, [state]);
+  console.log(admin);
   console.log(data);
   console.log(userData);
   return (
     <Box>
-      <Navbar />
+      <Navbar adminDetails={admin} />
 
       <Box color={"white"} w={{ base: "90%", sm: "80%" }} m="auto">
         <Text>User</Text>
@@ -87,37 +102,38 @@ export default function admin() {
               </Tr>
             </Thead>
             <Tbody>
-              {data && data.map((user, i) => {
-                return (
-                  <Tr key={user._id}>
-                    <Td>{i + 1}</Td>
-                    <Td
-                      cursor={"pointer"}
-                      onClick={() => {
-                        onOpen();
-                        handleUser(user);
-                      }}
-                    >
-                      <Flex>
-                        {" "}
-                        <Text mr="5px">{user._id}</Text>
-                        <BiLinkExternal />
-                      </Flex>
-                    </Td>
-                    <Td>{user.name}</Td>
-                    <Td>
-                      <Link href={`/admin/edituser/${user._id}`}>Edit</Link>
-                    </Td>
-                    <Td
-                      onClick={() => {
-                        handleDelete(user._id);
-                      }}
-                    >
-                      <Link>Delete</Link>
-                    </Td>
-                  </Tr>
-                );
-              })}
+              {data &&
+                data.map((user, i) => {
+                  return (
+                    <Tr key={user._id}>
+                      <Td>{i + 1}</Td>
+                      <Td
+                        cursor={"pointer"}
+                        onClick={() => {
+                          onOpen();
+                          handleUser(user);
+                        }}
+                      >
+                        <Flex>
+                          {" "}
+                          <Text mr="5px">{user._id}</Text>
+                          <BiLinkExternal />
+                        </Flex>
+                      </Td>
+                      <Td>{user.name}</Td>
+                      <Td>
+                        <Link href={`/admin/edituser/${user._id}`}>Edit</Link>
+                      </Td>
+                      <Td
+                        onClick={() => {
+                          handleDelete(user._id);
+                        }}
+                      >
+                        <Link>Delete</Link>
+                      </Td>
+                    </Tr>
+                  );
+                })}
             </Tbody>
           </Table>
         </TableContainer>
@@ -130,6 +146,8 @@ export default function admin() {
             <ModalCloseButton />
             <ModalBody>
               <Box color={"#FFFFFF"}>
+                <Image src={userData.pic} alt={userData._id} />
+
                 <Text>
                   <span style={{ fontWeight: "bold" }}>Id:</span> {userData._id}
                 </Text>
@@ -141,10 +159,7 @@ export default function admin() {
                   <span style={{ fontWeight: "bold" }}>Password:</span>{" "}
                   {userData.password}
                 </Text>
-                <Text>
-                  <span style={{ fontWeight: "bold" }}>Picture:</span>{" "}
-                  {userData.pic}
-                </Text>
+
                 <Text>
                   <span style={{ fontWeight: "bold" }}>Role:</span>{" "}
                   {userData.user}

@@ -14,22 +14,24 @@ import {
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Field, Form, Formik } from "formik";
-import AdminNavbar from "../../../components/adminNav";
+import Navbar from "../../../components/adminNav";
 import axios from "axios";
+import  jwt from "jsonwebtoken";
 export default function editUser({ data }) {
-  const [user, setUser] = useState({});
+  const [admin, setAdmin] = useState({});
   const router = useRouter();
+  const [user, setUser] = useState({});
   const id = router.query.edituser;
   const getuserData = () => {
     id &&
       axios
-        .get(`http://localhost:8080/user/${id}`)
+        .get(`https://zee5.cyclic.app/user/${id}`)
         .then((userr) => setUser(userr.data))
         .catch((err) => console.log(err));
   };
   const handleSignup =async (val) => {
     try{
-      const user =await axios.patch(`http://localhost:8080/user/${id}`,val);
+      const user =await axios.patch(`https://zee5.cyclic.app/user/${id}`,val);
     console.log(val);
     console.log(user.data)
     router.replace('/admin')
@@ -39,12 +41,21 @@ export default function editUser({ data }) {
     }
   };
   useEffect(() => {
+    let toke = JSON.parse(localStorage.getItem("token"))||"";
+    if (toke.length > 1) {
+      const details = jwt.decode(toke);
+      console.log(details)
+      if (details.user==="user" || details.user!=="admin") router.replace("/");
+      setAdmin(details)
+       
+    }else{
+      router.replace("/");
+    }
     getuserData();
   }, [id]);
-  console.log(user);
   return (
     <Box>
-      <AdminNavbar />
+     <Navbar adminDetails={admin} />
       
       <Box
         w={{ base: "90%", sm: "60%", md: "40%" }}
@@ -53,7 +64,12 @@ export default function editUser({ data }) {
         my="50px"
       >
         <Formik
-          initialValues={{}}
+          initialValues={{
+            name:user.name,
+            email:user.email,
+            password:user.password,
+            pic:user.pic
+          }}
           onSubmit={(values) => {
             handleSignup(values);
           }}
@@ -141,19 +157,3 @@ export default function editUser({ data }) {
     </Box>
   );
 }
-
-// export async function getServerSideProps() {
-//   const router = useRouter()
-//   const id = router.query.edituser;
-
-//   // Fetch data from external API
-//   if(id){
-//     console.log(id);
-//   }
-//   const ka = "a"
-//   //  const res = await fetch(`http://localhost:8080/user/${id}`)
-//   //  const data = await res.json()
-
-//   // Pass data to the page via props
-//   return { props: { ka } }
-// }
