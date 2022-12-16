@@ -10,8 +10,10 @@ import Image from "next/image";
 import createCoverUrl from "../utils/createCoverUrl";
 import { createListUrl } from "../utils/createCoverUrl";
 import Loading from "../pages/[parts]/loading";
+import { useRouter } from "next/router";
 
-export default function Section({ sectionData }) {
+export default function Section({ sectionData, queryPart, SamePage }) {
+  const router = useRouter();
   const settings = {
     dots: false,
     speed: 500,
@@ -64,7 +66,20 @@ export default function Section({ sectionData }) {
           let coverUrl = createCoverUrl(item.image_url.cover, id, 321, 482, "portrait");
           let originalTitle = item.original_title;
           return (
-            <div key={item.id + Math.random() * 100} className={styles.sectionCard}>
+            <div
+              onClick={() => {
+                if (SamePage) {
+                  let asPath = router.asPath.split("/");
+                  asPath.pop();
+                  asPath = asPath.join("/");
+                  router.push({
+                    pathname: asPath + `/${item.id}`,
+                  });
+                } else router.push(`${queryPart}/${item.id}`);
+              }}
+              key={item.id + Math.random() * 100}
+              className={styles.sectionCard}
+            >
               <CustomImage coverUrl={coverUrl} listUrl={item.image_url.list} id={item.id} />
             </div>
           );
