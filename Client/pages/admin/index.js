@@ -1,4 +1,5 @@
 import {
+  Image,
   Box,
   Table,
   TableCaption,
@@ -143,7 +144,7 @@ export default function admin() {
                 </Text>
                 <Text>
                   <span style={{ fontWeight: "bold" }}>Picture:</span>{" "}
-                  {userData.pic}
+                  <Image src={userData.pic} alt={i} />
                 </Text>
                 <Text>
                   <span style={{ fontWeight: "bold" }}>Role:</span>{" "}
@@ -160,3 +161,4 @@ export default function admin() {
     </Box>
   );
 }
+

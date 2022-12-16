@@ -15,31 +15,21 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { Field, Form, Formik } from "formik";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub, FaTwitter } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { useState } from "react";
+import jwt_decode from "jwt-decode";
+
 export default function Signup() {
-  if (typeof window !== 'undefined') {
-    const item = localStorage.getItem('token')
-    let bag = "";
-    for(let i=0;i<item.length;i++){
-      if(i===0 || i === item.length-1){
-        continue;
-      }
-      else bag+=item[i];
-    }
-    // console.log(bag);
-    var decoded = jwt_decode(bag);
-console.log(decoded);
-  }
-
-
   const toast = useToast();
   const router = useRouter();
-  const handleSignup = async (val) => {
+
+  const handleSignin = async (val) => {
     console.log(val);
     try {
-      let data = await axios.post("http://localhost:8080/user/signin", val);
-      console.log(data.data);
-      localStorage.setItem("token", JSON.stringify(data.data));
+      let res = await axios.post("http://localhost:8080/user/signin", val);
+     let data = res.data;
+     console.log(res.data);
+      localStorage.setItem("token",JSON.stringify(data));
       toast({
         title: "Redirecting.....Homepage",
         description: "user Successfully loged in",
@@ -47,7 +37,12 @@ console.log(decoded);
         duration: 9000,
         isClosable: true,
       });
-      router.replace("/");
+      const decoded = jwt_decode(data);
+      if (decoded.user === "admin") {
+        router.replace("/admin");
+      } else {
+        router.replace("/");
+      }
     } catch (err) {
       toast({
         title: "Please Enter Correct Details",
@@ -65,14 +60,14 @@ console.log(decoded);
         <Link href="/">X</Link>
       </Text>
       <Box
-        w={{base: "80%", sm: "60%", md: "40%"}}
+        w={{ base: "80%", sm: "60%", md: "40%" }}
         textAlign={"center"}
         m="auto"
       >
         <Text fontSize={"2xl"} fontWeight="bold">
           Login to ZEE5
         </Text>
-        <Text w={{base: "80%", sm: "60%"}} m="auto" my={"20px"}>
+        <Text w={{ base: "80%", sm: "60%" }} m="auto" my={"20px"}>
           Login to continue enjoying uninterrupted video and personalised
           experience.
         </Text>
@@ -96,9 +91,6 @@ console.log(decoded);
               }}
             />
           </Link>
-          <FaTwitter
-            style={{ marginRight: "30px", fontSize: "40px", color: "#00acee" }}
-          />
         </Flex>
 
         <Text
@@ -119,10 +111,10 @@ console.log(decoded);
               password: "",
             }}
             onSubmit={(values) => {
-              handleSignup(values);
+              handleSignin(values);
             }}
           >
-            {({handleSubmit, errors, touched}) => (
+            {({ handleSubmit, errors, touched }) => (
               <form onSubmit={handleSubmit}>
                 <VStack spacing={4} align="flex-start">
                   <FormControl isInvalid={!!errors.email && touched.email}>
@@ -152,7 +144,8 @@ console.log(decoded);
                   <FormControl
                     isInvalid={!!errors.password && touched.password}
                   >
-                    <FormLabel htmlFor="password">Password</FormLabel>                    <Field
+                    <FormLabel htmlFor="password">Password</FormLabel>{" "}
+                    <Field
                       as={Input}
                       id="password"
                       color="black"
@@ -180,9 +173,12 @@ console.log(decoded);
           </Formik>
         </Box>
       </Box>
-      <Text m="20px" textAlign={"center"}>If You're not registred Please <Link color="lightblue" href="/signup">Signup</Link></Text>
+      <Text m="20px" textAlign={"center"}>
+        If You're not registred Please
+        <Link color="lightblue" href="/signup">
+          Signup
+        </Link>
+      </Text>
     </Box>
   );
 }
-
-
