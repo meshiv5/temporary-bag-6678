@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/auth/google/callback",
+      callbackURL: "https://zee5.cyclic.app/auth/google/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
       const user = profile._json;
@@ -25,6 +25,7 @@ passport.use(
           password: existingUser.password,
           name: existingUser.name,
           pic: existingUser.pic,
+          user:existingUser.user
         };
         console.log(payload);
         return cb(null, payload);
@@ -42,6 +43,7 @@ passport.use(
           _id,
           password,
           pic: picture,
+          user:"user"
         };
         console.log(data);
         console.log("payload" + payload);

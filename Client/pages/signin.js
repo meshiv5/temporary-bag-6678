@@ -26,7 +26,7 @@ export default function Signup() {
   const handleSignin = async (val) => {
     console.log(val);
     try {
-      let res = await axios.post("http://localhost:8080/user/signin", val);
+      let res = await axios.post(`https://zee5.cyclic.app/user/signin`, val);
      let data = res.data;
      console.log(res.data);
       localStorage.setItem("token",JSON.stringify(data));
@@ -73,7 +73,7 @@ export default function Signup() {
         </Text>
 
         <Flex mt="20px" justifyContent={"center"}>
-          <Link href="http://localhost:8080/auth/google">
+          <Link href={`https://zee5.cyclic.app/auth/google`}>
             <FcGoogle
               style={{
                 marginLeft: "20px",
@@ -82,7 +82,7 @@ export default function Signup() {
               }}
             />
           </Link>
-          <Link href="http://localhost:8080/auth/github">
+          <Link href="https://zee5.cyclic.app/auth/github">
             <FaGithub
               style={{
                 marginRight: "30px",
@@ -174,9 +174,9 @@ export default function Signup() {
         </Box>
       </Box>
       <Text m="20px" textAlign={"center"}>
-        If You're not registred Please
+        If You're not registred Please{" "}
         <Link color="lightblue" href="/signup">
-          Signup
+           Signup
         </Link>
       </Text>
     </Box>
