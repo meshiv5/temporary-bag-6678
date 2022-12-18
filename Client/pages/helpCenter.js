@@ -51,7 +51,7 @@ const helpCenter = [
 
 export default function HelpCenter () {
     return (
-        <Box  borderRadius={"50px"}  w="80%" m="auto" my="50px">
+        <Box  borderRadius={"50px"}  w="100%" m="auto" my="50px">
             <Grid backgroundColor={"#FFFFFF"} p="50px"templateColumns={{base:"repeat(1,1fr)",sm:"repeat(2,1fr)",md:"repeat(3,1fr)"}} gap={5}>
             {helpCenter.map((item,i)=>{
                 return <GridItem w="300px" h="350px" borderRadius={"20px"} backgroundColor={"#FFFFFF"} border="2px solid #0F0617" key={i}>
@@ -60,7 +60,6 @@ export default function HelpCenter () {
                     <Text fontSize={"2xl"} backgroundColor={"#FFFFFF"}>{item.subhead1}</Text>
                     <Text fontSize={"2xl"} backgroundColor={"#FFFFFF"}>{item.subhead2}</Text>
                     <Text fontSize={"2xl"} backgroundColor={"#FFFFFF"}>{item.subhead3}</Text>
-                    <Text fontSize={"2xl"} backgroundColor={"#FFFFFF"}></Text>
                     </Box>
                 </GridItem>
             })}

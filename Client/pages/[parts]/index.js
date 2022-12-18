@@ -6,6 +6,7 @@ import { useState } from "react";
 import Loading from "./loading";
 const axios = require("axios");
 export default function Parts({ carouselData, buckets, queryPart }) {
+  console.log(carouselData, buckets, queryPart);
   const [bucketsData, setBucketsData] = useState([...buckets]);
   const [currPage, setCurrPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -54,7 +55,7 @@ export async function getServerSideProps({ query }) {
   if (queryPart) {
     try {
       const resp = await getHomePageData(queryPart);
-      const data = resp.data;
+      const data = await resp.data;
       let carouselData = data.buckets[0].items;
       let buckets = data.buckets;
       return {
