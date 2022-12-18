@@ -16,24 +16,45 @@ export default function SocialLinks() {
       <Flex alignItems="center">
         <Box>Download Apps</Box>
         <Box mx="20px">
-          <Img src="https://www.zee5.com/images/play_store.png?ver=2.52.65" />
+          <a
+            href="https://play.google.com/store/apps/details?id=com.graymatrix.did&pli=1"
+            target="_blank"
+          >
+            <Img src="https://www.zee5.com/images/play_store.png?ver=2.52.65" />
+          </a>
         </Box>
         <Box>
-          <Img src="https://www.zee5.com/images/app_store.png?ver=2.52.65" />
+          <a
+            target="_blank"
+            href="https://apps.apple.com/in/app/zee5-shows-live-tv-movies/id743691886"
+          >
+            <Img src="https://www.zee5.com/images/app_store.png?ver=2.52.65" />
+          </a>
         </Box>
       </Flex>
-      <Flex gap={{base:"22%",md:10}}>
+      <Flex gap={{base: "22%", md: 10}}>
         <Box>
-          <AiFillFacebook style={{width: "30px", height: "50px"}} />
+          <a target="_blank" href="https://www.facebook.com/ZEE5/">
+            <AiFillFacebook style={{width: "30px", height: "50px"}} />
+          </a>
         </Box>
         <Box>
-          <AiOutlineInstagram style={{width: "30px", height: "50px"}} />
+          <a href="https://www.instagram.com/zee5/" target="_blank">
+            <AiOutlineInstagram style={{width: "30px", height: "50px"}} />
+          </a>
         </Box>
         <Box>
-          <AiOutlineTwitter style={{width: "30px", height: "50px"}} />
+          <a href="https://twitter.com/zee5india" target="_blank">
+            <AiOutlineTwitter style={{width: "30px", height: "50px"}} />
+          </a>
         </Box>
         <Box>
-          <AiFillYoutube style={{width: "30px", height: "50px"}} />
+          <a
+            target="_blank"
+            href="https://www.youtube.com/channel/UCXOgAl4w-FQero1ERbGHpXQ"
+          >
+            <AiFillYoutube style={{width: "30px", height: "50px"}} />
+          </a>
         </Box>
       </Flex>
     </Box>

@@ -27,7 +27,11 @@ import ZeeLogo from "./ZeeLogo";
 import MenuLogin from "./MenuLogin";
 import Profile from "./Profile";
 import { useEffect } from "react";
+import { useState } from "react";
 
+function Navbar({size, handleAuth, isAuth, handleLook}) {
+  const [inputText, setInput] = useState("");
+  const router = useRouter();
 function Navbar({ size, handleAuth, isAuth }) {
   const checkRoute = useRouter();
   let x = 9;
@@ -136,6 +140,35 @@ function Navbar({ size, handleAuth, isAuth }) {
           {size > 1200 && (
             <Flex pl="10px" borderRadius="10px" border="1px solid white" alignItems="center">
               <BiSearch />
+<<<<<<< HEAD
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  router.push(`/search?q=${inputText}&p=1`);
+
+                  console.log(inputText);
+                }}
+              >
+                <Input
+                  value={inputText}
+                  border="none"
+                  w="300px"
+                  placeholder="Search"
+                  focusBorderColor="transparent"
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </form>
+            </Flex>
+          )}
+          {size <= 1200 && (
+              <BiSearch
+                onClick={() => {
+                  handleLook(true);
+                  router.push("/search?q=a&p=1")
+                }}
+                style={{width: "30px", height: "30px"}}
+              />
+=======
               <Input border="none" w="300px" placeholder="Search" focusBorderColor="transparent" />
             </Flex>
           )}
@@ -143,6 +176,7 @@ function Navbar({ size, handleAuth, isAuth }) {
             <Link href="/search">
               <BiSearch style={{ width: "30px", height: "30px" }} />
             </Link>
+>>>>>>> main
           )}
           {size > 1200 &&
             (!isAuth ? (
@@ -173,7 +207,11 @@ function Navbar({ size, handleAuth, isAuth }) {
                   <MenuLogin />
                 </Flex>
               )}
+<<<<<<< HEAD
+              <MenuItem _hover={{color: "purple"}} pl="15px" bg="black">
+=======
               <MenuItem _hover={{ color: "purple" }} pl="15px" bg="black">
+>>>>>>> main
                 <Link href="/">Home</Link>
               </MenuItem>
               <Accordion defaultIndex={[0]} allowMultiple>

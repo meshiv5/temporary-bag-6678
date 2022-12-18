@@ -7,6 +7,7 @@ const cors = require("cors");
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cors());
+
 //google
 const passport = require("./Routes/Auth/googleOauth2");
 // github
@@ -14,6 +15,11 @@ const github = require("./Routes/Auth/githuboauth");
 const cookieParser = require("cookie-parser");
 server.use(cookieParser());
 const userRouter = require("./Routes/Auth/user.routes.js");
+
+//search Router
+const app = require("./Routes/search.route.js");
+server.use("/",app)
+
 server.use("/user", userRouter);
 const PORT = process.env.PORT || 8080;
 server.get("/", (req, res) => {

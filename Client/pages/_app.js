@@ -1,16 +1,18 @@
 // pages/_app.js
-import { ChakraProvider } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import {ChakraProvider} from "@chakra-ui/react";
+import {useEffect, useState} from "react";
 import jwt from "jsonwebtoken";
 import Footer from "../components/footer/Footer";
 import Navbar from "../components/navbar/Navbar";
 import "../styles/globals.css";
-function MyApp({ Component, pageProps }) {
+import SearchBar from "../components/searchbar/searchBar";
+function MyApp({Component, pageProps}) {
+  const [look,setLook] = useState(false)
   const [isAuth, setAuth] = useState(false);
   const [size, setSize] = useState(1200);
   const updateSize = () => setSize(window.innerWidth);
   const handleAuth = () => {
-    let token = JSON.parse(localStorage.getItem("token"))||"";
+    let token = JSON.parse(localStorage.getItem("token")) || "";
     if (token.length > 1) {
       const details = jwt.decode(token);
       // console.log(details)
@@ -21,15 +23,28 @@ function MyApp({ Component, pageProps }) {
       } catch (e) {
         return console.log(e.message);
       }
-    }else {
+    } else {
       setAuth(false);
     }
   };
+
+  const handleLook = (a)=>{
+    setLook(a)
+  }
   useEffect(() => (window.onresize = updateSize), []);
   // console.log(isAuth)
   return (
     <ChakraProvider>
-      <Navbar size={size} isAuth={isAuth} handleAuth={handleAuth} />
+      {look ? (
+        <SearchBar handleLook={handleLook} />
+      ) : (
+        <Navbar
+          size={size}
+          isAuth={isAuth}
+          handleAuth={handleAuth}
+          handleLook={handleLook}
+        />
+      )}
       <Component {...pageProps} handleAuth={handleAuth} />
       <Footer size={size} />
     </ChakraProvider>
