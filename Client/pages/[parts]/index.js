@@ -52,13 +52,24 @@ export default function Parts({ carouselData, buckets, queryPart }) {
 }
 
 export async function getServerSideProps({ query }) {
-  const router = useRouter();
   let queryPart = query.parts;
   if (queryPart == "terms") {
-    router.push("/term");
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/terms",
+      },
+      props: {},
+    };
   }
   if (queryPart == "helpcenter") {
-    router.push("/helpcenter");
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/helpcenter",
+      },
+      props: {},
+    };
   }
   if (queryPart) {
     try {
