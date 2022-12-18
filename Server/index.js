@@ -45,7 +45,7 @@ server.get(
     }
 
     // Successful authentication, redirect home.
-    res.redirect("http://localhost:3000");
+    res.redirect(`http://localhost:3000?token=${token}`);
   }
 );
 
@@ -71,7 +71,7 @@ server.get(
     }
 
     // Successful authentication, redirect home.
-    res.redirect("http://localhost:3000");
+    res.redirect(`http://localhost:3000?token=${token}`);
   }
 );
 
