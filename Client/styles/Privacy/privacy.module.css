@@ -1,0 +1,21 @@
+.policy{
+    /* display: block; */
+    
+    width: auto;
+    color: white;
+    background-color: black;
+    
+}
+.polic{
+    color: rgb(207, 200, 200);
+    font-size: small;
+    width: 90%;
+    margin-left: 6%;
+    justify-content: center;
+}
+.hhh{
+    margin-left: 10%;
+    justify-content: center;
+    padding: 10px;
+    /* margin-bottom: 10%; */
+}
