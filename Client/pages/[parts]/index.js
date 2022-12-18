@@ -53,7 +53,7 @@ export default function Parts({ carouselData, buckets, queryPart }) {
 
 export async function getServerSideProps({ query }) {
   let queryPart = query.parts;
-
+  
   if (queryPart) {
     try {
       const resp = await getHomePageData(queryPart);
