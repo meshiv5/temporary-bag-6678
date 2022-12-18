@@ -18,7 +18,6 @@ import { useRouter } from "next/router";
 export default function AdminNavbar({ adminDetails }) {
   const router = useRouter();
   const  handleLogout=()=>{
-      cookie.remove("TOKEN");
       localStorage.removeItem("token");
       router.replace("/signin")
   }
