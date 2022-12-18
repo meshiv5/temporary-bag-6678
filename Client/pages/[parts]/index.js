@@ -53,24 +53,7 @@ export default function Parts({ carouselData, buckets, queryPart }) {
 
 export async function getServerSideProps({ query }) {
   let queryPart = query.parts;
-  if (queryPart == "terms") {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/terms",
-      },
-      props: {},
-    };
-  }
-  if (queryPart == "helpcenter") {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/helpcenter",
-      },
-      props: {},
-    };
-  }
+
   if (queryPart) {
     try {
       const resp = await getHomePageData(queryPart);
