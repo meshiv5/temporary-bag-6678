@@ -23,7 +23,6 @@ export default function Search({movies, error}) {
   }
   const handleChangePage = async(q,page,x)=>{
     const newData = await getSearchItems(q,page,x)
-    console.log(newData.data)
     setItemData([...newData.data])
   }
 useEffect(()=>{
