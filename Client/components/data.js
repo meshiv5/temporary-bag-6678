@@ -19,7 +19,7 @@ export const info = [
   {name: "About Us", path: "/about"},
   {name: "Help Center", path: "/helpcenter"},
   {name: "Content Redressal Mechanism", path: "/redressalmechanism"},
-  {name: "Term of Use", path: "/term"},
+  {name: "Term of Use", path: "/terms"},
   {name: "Privacy Policy", path: "/privacy"}
 ];
 export const plans = [
