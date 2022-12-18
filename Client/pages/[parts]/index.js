@@ -54,6 +54,7 @@ export async function getServerSideProps({ query }) {
   let queryPart = query.parts;
   if (queryPart) {
     try {
+      
       const resp = await getHomePageData(queryPart);
       const data = await resp.data;
       let carouselData = data.buckets[0].items;
