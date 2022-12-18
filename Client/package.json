@@ -35,5 +35,8 @@
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "thunk": "^0.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0"
   }
 }

@@ -1,35 +1,32 @@
-import {Box, Button, HStack} from "@chakra-ui/react";
-import {useState} from "react";
-import {useRouter} from "next/router";
+import { Box, Button, HStack, SimpleGrid } from "@chakra-ui/react";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
-
-export default function Filters({handleFilters}) {
+export default function Filters({ handleFilters }) {
   const router = useRouter();
-  const [values, setValues] = useState({l: "", g: "", c: ""});
-  const handleSelect = ({target}) => {
+  const [values, setValues] = useState({ l: "", g: "", c: "" });
+  const handleSelect = ({ target }) => {
     if (target.name === "language") {
-      setValues({l: target.value, g: "", c: ""});
+      setValues({ l: target.value, g: "", c: "" });
     } else if (target.name === "genres") {
-      setValues({l: "", g: target.value, c: ""});
+      setValues({ l: "", g: target.value, c: "" });
     } else {
-      setValues({l: "", g: "", c: target.value});
+      setValues({ l: "", g: "", c: target.value });
     }
   };
   const handleCLick = () => {
-    router.push(
-      `/search?q=${router.query.q}&p=${router.query.p}&l=${values.l}&g=${values.g}&c=${values.c}`
-    );
-    handleFilters({...values})
+    router.push(`/search?q=${router.query.q}&p=${router.query.p}&l=${values.l}&g=${values.g}&c=${values.c}`);
+    handleFilters({ ...values });
   };
   return (
-    <Box py="20px">
-      <HStack spacing={3}>
+    <Box py="20px" w={{ base: "100%", md: "600px" }}>
+      <SimpleGrid columns={{ base: 2, md: 4 }} spacing={15}>
         <select
           value={values.l}
           onChange={handleSelect}
           name="language"
           style={{
-            width: "150px",
+            width: "100%",
             border: "1px solid white",
             padding: "10px",
             borderRadius: "10px",
@@ -47,7 +44,7 @@ export default function Filters({handleFilters}) {
           onChange={handleSelect}
           name="genres"
           style={{
-            width: "150px",
+            width: "100%",
             border: "1px solid white",
             padding: "10px",
             borderRadius: "10px",
@@ -64,7 +61,7 @@ export default function Filters({handleFilters}) {
           value={values.c}
           onChange={handleSelect}
           style={{
-            width: "150px",
+            width: "100%",
             border: "1px solid white",
             padding: "10px",
             borderRadius: "10px",
@@ -80,7 +77,7 @@ export default function Filters({handleFilters}) {
         <Button onClick={handleCLick} colorScheme="purple">
           Apply
         </Button>
-      </HStack>
+      </SimpleGrid>
     </Box>
   );
 }

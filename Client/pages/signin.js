@@ -1,16 +1,4 @@
-import {
-  Box,
-  Text,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  Flex,
-  VStack,
-  useToast,
-  Link,
-} from "@chakra-ui/react";
+import { Box, Text, Button, FormControl, FormErrorMessage, FormLabel, Input, Flex, VStack, useToast, Link } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Field, Form, Formik } from "formik";
@@ -27,9 +15,9 @@ export default function Signup() {
     console.log(val);
     try {
       let res = await axios.post(`https://zee5.cyclic.app/user/signin`, val);
-     let data = res.data;
-     console.log(res.data);
-      localStorage.setItem("token",JSON.stringify(data));
+      let data = res.data;
+      console.log(res.data);
+      localStorage.setItem("token", JSON.stringify(data));
       toast({
         title: "Redirecting.....Homepage",
         description: "user Successfully loged in",
@@ -65,17 +53,12 @@ export default function Signup() {
       <Text textAlign={"right"} mr="30px" mt="30px" fontWeight="bold">
         <Link href="/">X</Link>
       </Text>
-      <Box
-        w={{ base: "80%", sm: "60%", md: "40%" }}
-        textAlign={"center"}
-        m="auto"
-      >
+      <Box w={{ base: "80%", sm: "60%", md: "40%" }} textAlign={"center"} m="auto">
         <Text fontSize={"2xl"} fontWeight="bold">
           Login to ZEE5
         </Text>
         <Text w={{ base: "80%", sm: "60%" }} m="auto" my={"20px"}>
-          Login to continue enjoying uninterrupted video and personalised
-          experience.
+          Login to continue enjoying uninterrupted video and personalised experience.
         </Text>
 
         <Flex mt="20px" justifyContent={"center"}>
@@ -99,14 +82,7 @@ export default function Signup() {
           </Link>
         </Flex>
 
-        <Text
-          w="60px"
-          m="auto"
-          pr="10px"
-          my="20px"
-          fontWeight={"bold"}
-          fontSize="30px"
-        >
+        <Text w="60px" m="auto" pr="10px" my="20px" fontWeight={"bold"} fontSize="30px">
           OR
         </Text>
 
@@ -147,9 +123,7 @@ export default function Signup() {
                     />
                     <FormErrorMessage>{errors.email}</FormErrorMessage>
                   </FormControl>
-                  <FormControl
-                    isInvalid={!!errors.password && touched.password}
-                  >
+                  <FormControl isInvalid={!!errors.password && touched.password}>
                     <FormLabel htmlFor="password">Password</FormLabel>{" "}
                     <Field
                       as={Input}
@@ -165,12 +139,7 @@ export default function Signup() {
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
 
-                  <Button
-                    type="submit"
-                    background={"#8230c6"}
-                    color="white"
-                    width="full"
-                  >
+                  <Button type="submit" background={"#8230c6"} color="white" width="full">
                     Signin
                   </Button>
                 </VStack>
@@ -182,7 +151,7 @@ export default function Signup() {
       <Text m="20px" textAlign={"center"}>
         If You're not registred Please{" "}
         <Link color="lightblue" href="/signup">
-           Signup
+          Signup
         </Link>
       </Text>
     </Box>
