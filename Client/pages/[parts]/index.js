@@ -4,6 +4,7 @@ import getHomePageData from "../../utils/getHomePageData";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useState } from "react";
 import Loading from "./loading";
+import { useRouter } from "next/router";
 const axios = require("axios");
 export default function Parts({ carouselData, buckets, queryPart }) {
   console.log(buckets);
@@ -51,10 +52,16 @@ export default function Parts({ carouselData, buckets, queryPart }) {
 }
 
 export async function getServerSideProps({ query }) {
+  const router = useRouter();
   let queryPart = query.parts;
+  if (queryPart == "terms") {
+    router.push("/term");
+  }
+  if (queryPart == "helpcenter") {
+    router.push("/helpcenter");
+  }
   if (queryPart) {
     try {
-      
       const resp = await getHomePageData(queryPart);
       const data = await resp.data;
       let carouselData = data.buckets[0].items;
