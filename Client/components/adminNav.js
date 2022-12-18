@@ -3,7 +3,6 @@ import {
   Flex,
   Text,
   Avatar,
-  Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -12,11 +11,10 @@ import {
   PopoverHeader,
   PopoverBody,
   Image,
-  Button
+  Button,
+  Link
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import cookie from "js-cookie";
-import Zee5logo from "./navbar/ZeeLogo";
 export default function AdminNavbar({ adminDetails }) {
   const router = useRouter();
   const  handleLogout=()=>{
@@ -39,10 +37,10 @@ export default function AdminNavbar({ adminDetails }) {
         alignItems="center"
         backgroundColor={"#160c2e"}
       >
-        <Text backgroundColor={"#160c2e"}>
-          <Link href="/admin"><Zee5logo/></Link>
-        </Text>
-
+         <Link href="/admin"><Box cursor="pointer" w="50px">
+          <Image src="https://www.zee5.com/images/ZEE5_logo.svg?ver=2.52.64" />
+        </Box></Link>
+       
         <Flex alignItems="center" backgroundColor={"#160c2e"}>
           <Text mx="30px" backgroundColor={"#160c2e"}>
             {adminDetails.name}
