@@ -1,0 +1,23 @@
+.abt{
+    /* display: block; */
+    height: auto;
+    width: auto;
+    color: white;
+    background-color: black;
+    
+}
+.abts{
+    color: rgb(207, 200, 200);
+    font-size: small;
+    width: 90%;
+    height: auto;
+    margin-left: 6%;
+    justify-content: center;
+    margin-bottom: 20%;
+}
+.mh{
+    margin-left: 50%;
+    justify-content: center;
+    padding: 10px;
+    /* margin-bottom: 10%; */
+}

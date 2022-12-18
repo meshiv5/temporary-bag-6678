@@ -1,0 +1,20 @@
+.trms{
+    /* display: block; */
+    
+    width: auto;
+    color: white;
+    background-color: black;
+    
+}
+.trm{
+    color: rgb(207, 200, 200);
+    font-size: small;
+    width: 90%;
+    margin-left: 6%;
+    justify-content: center;
+}
+.hh{
+    margin-left: 45%;
+    padding: 10px;
+    /* margin-bottom: 10%; */
+}
