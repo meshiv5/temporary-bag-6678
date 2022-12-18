@@ -2,11 +2,16 @@ import Carousel from "../../components/Carousel";
 import Section from "../../components/Section";
 import getHomePageData from "../../utils/getHomePageData";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import jwt from "jsonwebtoken";
 import Loading from "./loading";
 const axios = require("axios");
-export default function Parts({ carouselData, buckets, queryPart }) {
-  console.log(carouselData, buckets, queryPart);
+import { useRouter } from "next/router";
+export default function Parts({ carouselData, buckets, queryPart,handleAuth }) {
+  const router = useRouter()
+  let {token} = router.query;
+  // console.log(token)
+  // console.log(carouselData, buckets, queryPart);
   const [bucketsData, setBucketsData] = useState([...buckets]);
   const [currPage, setCurrPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -30,6 +35,16 @@ export default function Parts({ carouselData, buckets, queryPart }) {
       return;
     }
   };
+  useEffect(() => {
+    if (token) localStorage.setItem("token", JSON.stringify(token));
+    let toke = JSON.parse(localStorage.getItem("token")) || "";
+    if (toke.length > 1) {
+      const details = jwt.decode(toke);
+      console.log(details);
+      if (details.user === "admin") router.replace("/admin");
+    }
+    handleAuth();
+  }, [token]);
   return (
     <div>
       <Carousel carouselData={carouselData} queryPart={queryPart} />
