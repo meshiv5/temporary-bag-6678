@@ -1,4 +1,4 @@
-import {Box, Button, HStack} from "@chakra-ui/react";
+import {Box, Button, HStack, SimpleGrid} from "@chakra-ui/react";
 import {useState} from "react";
 import {useRouter} from "next/router";
 
@@ -22,14 +22,14 @@ export default function Filters({handleFilters}) {
     handleFilters({...values})
   };
   return (
-    <Box py="20px">
-      <HStack spacing={3}>
+    <Box py="20px" w={{base: "100%", md: "600px"}}>
+      <SimpleGrid columns={{base: 2, md: 4}} spacing={15}>
         <select
           value={values.l}
           onChange={handleSelect}
           name="language"
           style={{
-            width: "150px",
+            width: "100%",
             border: "1px solid white",
             padding: "10px",
             borderRadius: "10px",
@@ -47,7 +47,7 @@ export default function Filters({handleFilters}) {
           onChange={handleSelect}
           name="genres"
           style={{
-            width: "150px",
+            width: "100%",
             border: "1px solid white",
             padding: "10px",
             borderRadius: "10px",
@@ -64,7 +64,7 @@ export default function Filters({handleFilters}) {
           value={values.c}
           onChange={handleSelect}
           style={{
-            width: "150px",
+            width: "100%",
             border: "1px solid white",
             padding: "10px",
             borderRadius: "10px",
@@ -80,7 +80,7 @@ export default function Filters({handleFilters}) {
         <Button onClick={handleCLick} colorScheme="purple">
           Apply
         </Button>
-      </HStack>
+      </SimpleGrid>
     </Box>
   );
 }
