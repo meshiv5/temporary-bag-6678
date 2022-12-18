@@ -1,8 +1,10 @@
 import { Box, Img, Text } from "@chakra-ui/react";
+import {useRouter} from "next/router";
 
 export default function SearchedVideos({data}) {
+  const router = useRouter()
   return (
-      <Box >
+      <Box onClick={()=>router.push(`/homepage/${data.id}`)}>
         <Box _hover={{padding: "0px"}} p="10px">
           <Img w="100%" src={data.list} />
         </Box>
