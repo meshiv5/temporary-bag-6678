@@ -203,8 +203,7 @@ export default function Signup() {
                     background={"#8230c6"}
                     color="white"
                     width="full"
-                  >
-                    Signup
+                  >Signup
                   </Button>
                 </VStack>
               </form>
