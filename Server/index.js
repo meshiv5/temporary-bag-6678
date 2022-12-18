@@ -1,5 +1,4 @@
 const express = require("express");
-require("dotenv").config();
 const server = express();
 const jwt = require("jsonwebtoken");
 const connect = require("./Utils/dbconnect.js");
@@ -7,7 +6,6 @@ const cors = require("cors");
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cors());
-
 //google
 const passport = require("./Routes/Auth/googleOauth2");
 // github
@@ -15,13 +13,10 @@ const github = require("./Routes/Auth/githuboauth");
 const cookieParser = require("cookie-parser");
 server.use(cookieParser());
 const userRouter = require("./Routes/Auth/user.routes.js");
-
-//search Router
-const app = require("./Routes/search.route.js");
-server.use("/",app)
-
+const MoviesRouter  = require("./Routes/Serach/search.route.js")
 server.use("/user", userRouter);
-const PORT = process.env.PORT || 8080;
+server.use("/", MoviesRouter);
+const PORT = 8080;
 server.get("/", (req, res) => {
   res.send("Hello world!");
 });
@@ -45,13 +40,11 @@ server.get(
         const token = await jwt.sign(req.user, "KARTHIK");
         console.log(token);
         res.cookie("TOKEN", token);
+        return res.redirect(`http://localhost:3000?token=${token}`);
       } catch (e) {
         console.log(e);
       }
     }
-
-    // Successful authentication, redirect home.
-    res.redirect(`http://localhost:3000?token=${token}`);
   }
 );
 
@@ -71,17 +64,15 @@ server.get(
         const token = await jwt.sign(req.user, "KARTHIK");
         console.log(token);
         res.cookie("TOKEN", token);
+        return res.redirect(`http://localhost:3000?token=${token}`);
       } catch (e) {
         console.log(e);
       }
     }
 
     // Successful authentication, redirect home.
-    res.redirect(`http://localhost:3000?token=${token}`);
   }
 );
-
-
 
 server.listen(PORT, async () => {
   try {

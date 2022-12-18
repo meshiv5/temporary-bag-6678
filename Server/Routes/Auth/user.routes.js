@@ -3,7 +3,6 @@ const User = require("../../Models/user.model.js");
 const jwt = require("jsonwebtoken");
 const server = express.Router();
 const bcrypt = require("bcrypt");
-require("dotenv").config();
 server.post("/signup", async (req, res) => {
   let { name, email, password, pic } = req.body;
 
@@ -53,7 +52,7 @@ server.post("/signin", async (req, res) => {
             user:user.user
           };
 
-          const token = await jwt.sign(data, process.env.JWT_SECRET);
+          const token = await jwt.sign(data,"ZEE5");
           console.log(token);
           res.cookie("karthik",token)
           return res.send(token);
@@ -64,7 +63,7 @@ server.post("/signin", async (req, res) => {
           user:user.user
         };
 
-        const token = await jwt.sign(data, process.env.JWT_SECRET);
+        const token = await jwt.sign(data,"ZEE5");
         console.log(token);
         res.cookie("TOKEN", token);
         return res.status(200).send(token);
