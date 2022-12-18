@@ -6,7 +6,7 @@ import { useState } from "react";
 import Loading from "./loading";
 const axios = require("axios");
 export default function Parts({ carouselData, buckets, queryPart }) {
-  console.log(carouselData, buckets, queryPart);
+  console.log(buckets);
   const [bucketsData, setBucketsData] = useState([...buckets]);
   const [currPage, setCurrPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);

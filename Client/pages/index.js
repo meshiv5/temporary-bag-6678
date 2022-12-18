@@ -11,15 +11,10 @@ export default function Home({ handleAuth }) {
     let toke = JSON.parse(localStorage.getItem("token")) || "";
     if (toke.length > 1) {
       const details = jwt.decode(toke);
-      console.log(details);
       if (details.user === "admin") router.replace("/admin");
+      if (details.user === "user") router.replace("/homepage");
     }
     handleAuth();
   }, [token]);
-  return router.push("/homepage");
-  return (
-    <div>
-      <h1>Index File</h1>
-    </div>
-  );
+  return <div></div>;
 }
