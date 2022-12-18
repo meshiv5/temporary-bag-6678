@@ -34,14 +34,14 @@ export default function admin() {
   const toast = useToast();
   const [userData, setUserdata] = useState({});
   const [data, setData] = useState([]);
+  const [Loading, setLoading] = useState(false);
   const [admin, setAdmin] = useState({});
-  const [state, setState] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleUser = (user) => {
-    // console.log(user);
     setUserdata(user);
   };
   const getData = async () => {
+    setLoading(true);
     try {
       const res = await axios
         .get(`https://zee5.cyclic.app/user`)
@@ -50,9 +50,9 @@ export default function admin() {
     } catch (err) {
       console.log(err.message);
     }
+    setLoading(false);
   };
   const handleDelete = async (id) => {
-    setState(!state);
     try {
       let res = await axios.delete(`https://zee5.cyclic.app/user/${id}`);
       toast({
@@ -80,16 +80,17 @@ export default function admin() {
       router.replace("/");
     }
     getData();
-  }, [state]);
-  console.log(admin);
+  }, []);
   console.log(data);
   console.log(userData);
+
+  if(Loading) return <h1>Loading...</h1>
   return (
     <Box>
       <Navbar adminDetails={admin} />
 
       <Box color={"white"} w={{ base: "90%", sm: "80%" }} m="auto">
-        <Text>User</Text>
+        <Text fontSize={"4xl"} color="cyan">Users</Text>
         <TableContainer>
           <Table variant="striped" colorScheme="grey">
             <Thead>
@@ -175,3 +176,9 @@ export default function admin() {
     </Box>
   );
 }
+
+// export async function getServerSideProps() {
+//   const res = await axios.get(`https://zee5.cyclic.app/user`);
+//   const data = res.data;
+//   return { props: { data } }
+// }
