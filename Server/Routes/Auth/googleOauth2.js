@@ -5,7 +5,6 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GOOGLE_CLIENT_ID =
   "592041502906-soi11274l2t7sm9boa9lk83kg1kaldqo.apps.googleusercontent.com";
 const GOOGLE_CLIENT_SECRET = "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";
-require("dotenv").config();
 passport.use(
   new GoogleStrategy(
     {

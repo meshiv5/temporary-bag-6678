@@ -1,5 +1,5 @@
 const express = require("express");
-const MovieModel = require("../Models/movies.model");
+const MovieModel = require("../../Models/movies.model");
 
 const app = express.Router();
 
