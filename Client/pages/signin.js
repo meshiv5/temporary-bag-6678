@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import { Field, Form, Formik } from "formik";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 
 export default function Signup() {
@@ -54,6 +54,12 @@ export default function Signup() {
       console.log(err);
     }
   };
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("token")) || "";
+    if (token.length > 1) {
+      router.replace("/homepage");
+    }
+  }, []);
   return (
     <Box mb="50px" color="#ffffff">
       <Text textAlign={"right"} mr="30px" mt="30px" fontWeight="bold">
