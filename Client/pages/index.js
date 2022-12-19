@@ -1,3 +1,10 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 export default function Index() {
-  return <h1></h1>;
+  let router = useRouter();
+  useEffect(() => {
+    router.push("/homepage");
+  });
+
+  return <></>;
 }
