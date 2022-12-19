@@ -1,6 +1,3 @@
-import { useRouter } from "next/router";
-
-export default function Home() {
-  let router = useRouter()
-  return router.push("/homepage");
+export default function Index() {
+  return <h1></h1>;
 }
