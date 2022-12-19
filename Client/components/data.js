@@ -17,9 +17,9 @@ export const categories = [
 
 export const info = [
   { name: "About Us", path: "/about" },
-  { name: "Help Center", path: "/helpcenter" },
+  { name: "Help Center", path: "/hc" },
   { name: "Content Redressal Mechanism", path: "/redressalmechanism" },
-  { name: "Term of Use", path: "/terms" },
+  { name: "Term of Use", path: "/ts" },
   { name: "Privacy Policy", path: "/privacy" },
 ];
 export const plans = [
