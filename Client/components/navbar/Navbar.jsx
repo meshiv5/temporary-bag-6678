@@ -37,7 +37,7 @@ function Navbar({ size, handleAuth, isAuth, handleLook }) {
   if (size < 1360) x = 3;
 
   useEffect(() => handleAuth(), []);
-  if (checkRoute.pathname == "/signin" || checkRoute.pathname == "/signup" || checkRoute.pathname == "/admin" || checkRoute.pathname == "/edit") {
+  if (checkRoute.pathname == "/signin" || checkRoute.pathname == "/signup" || checkRoute.pathname == "/admin" || checkRoute.pathname == "/admin/edituser") {
     return <p></p>;
   }
   return (

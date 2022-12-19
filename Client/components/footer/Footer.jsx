@@ -7,7 +7,12 @@ import SocialLinks from "./SocialLinks";
 import { useRouter } from "next/router";
 export default function Footer({ size }) {
   const checkRoute = useRouter();
-  if (checkRoute.pathname == "/signin" || checkRoute.pathname == "/signup" || checkRoute.pathname == "/admin" || checkRoute.pathname == "/edit") {
+  if (
+    checkRoute.pathname == "/signin" ||
+    checkRoute.pathname == "/signup" ||
+    checkRoute.pathname == "/admin" ||
+    checkRoute.pathname == "/admin/edituser"
+  ) {
     return <p></p>;
   }
   return (
