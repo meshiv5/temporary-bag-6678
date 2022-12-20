@@ -22,6 +22,41 @@ This is A Clone Of Zee5 Which is A OTT Application To watch movies and web-serie
 ```
 # Responsibilities
 ```javascript
+Shivendra
+```
+## Authentication
+  - Home Page & Video Pages
+  
+  - Responsiveness
+  <img src="https://ibb.co/mXFfXmL"/>
+  
+  - Home
+  <img src="https://ibb.co/2ZMNFFV" />
+  
+  - Video
+  <img src="https://ibb.co/JyH0txx"/>
+    
+    
+### Admin Panel
+  - Admin Page
+  <img src="https://i.ibb.co/qWLh5bb/image.png" />
+  
+  - Delete User
+  <img src="https://i.ibb.co/3fzsFhN/image.png" />
+  
+  - See User Details
+  <img src="https://i.ibb.co/TMHVGV0/image.png" />
+  
+  - Edit User
+  <img src="https://i.ibb.co/8Db47JJ/image.png" />
+  
+  - Logout User
+  <img src="https://i.ibb.co/nn9HnY2/image.png" />
+  
+
+
+# Responsibilities
+```javascript
 Karthik
 ```
 ## Authentication
