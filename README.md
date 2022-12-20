@@ -13,7 +13,7 @@ This is A Clone Of Zee5 Which is A OTT Application To watch movies and web-serie
 
 ```
 - Next js
-- Chakra -Ui
+- Chakra - Ui
 - passport Oauth
 - CSS3
 - MongoDB - Atlas
