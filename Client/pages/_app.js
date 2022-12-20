@@ -6,7 +6,9 @@ import Footer from "../components/footer/Footer";
 import Navbar from "../components/navbar/Navbar";
 import "../styles/globals.css";
 import SearchBar from "../components/searchbar/searchBar";
-function MyApp({ Component, pageProps }) {
+
+export default function MyApp({ Component, pageProps, width }) {
+  console.log(width);
   const [look, setLook] = useState(false);
   const [isAuth, setAuth] = useState(false);
   const [size, setSize] = useState(1920);
@@ -31,7 +33,9 @@ function MyApp({ Component, pageProps }) {
   const handleLook = (a) => {
     setLook(a);
   };
-  useEffect(() => (window.onresize = updateSize), []);
+  useEffect(() => {
+    window.onresize = updateSize;
+  }, []);
   // console.log(isAuth)
   return (
     <ChakraProvider>
@@ -42,4 +46,13 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export function getServerSideProps() {
+  const hasWindow = typeof window !== "undefined";
+  const width = hasWindow ? window.innerWidth : null;
+  const height = hasWindow ? window.innerHeight : null;
+  return {
+    props: {
+      width,
+    },
+  };
+}
