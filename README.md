@@ -16,7 +16,9 @@ This is A Clone Of Zee5 Which is A OTT Application To watch movies and web-serie
 - Chakra -Ui
 - passport Oauth
 - CSS3
-
+- MongoDB - Atlas
+- express
+- Node js
 ```
 # Responsibilities
 ```javascript
