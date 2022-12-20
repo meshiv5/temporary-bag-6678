@@ -9,7 +9,19 @@ This is A Clone Of Zee5 Which is A OTT Application To watch movies and web-serie
 - Karthik Alakunta  
 ```
 
+# Tech Stacks
+
+```
+- Next js
+- Chakra -Ui
+- passport Oauth
+- CSS3
+
+```
 # Responsibilities
+```javascript
+Karthik
+```
 ## Authentication
   - Google Oauth
   <img src="https://i.ibb.co/F881V4T/image.png" />
