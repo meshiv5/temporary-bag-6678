@@ -75,4 +75,9 @@ Karthik
   <img src="https://i.ibb.co/nn9HnY2/image.png" />
   
 
-  
+  # To Run The App
+```
+- Clone git Repo Using git clone https://github.com/meshiv5/temporary-bag-6678
+- nmp i (to install all required packages)
+- npm run dev (To Run NextJS on DEV Mode)
+```
