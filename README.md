@@ -28,30 +28,16 @@ Shivendra
   - Home Page & Video Pages
   
   - Responsiveness
-  <img src="https://ibb.co/mXFfXmL"/>
+  <img src="https://i.ibb.co/kmD1GGb/ss1.png"/>
   
   - Home
-  <img src="https://ibb.co/2ZMNFFV" />
+  <img src="https://i.ibb.co/2sdmh88/ss2.png" />
   
   - Video
-  <img src="https://ibb.co/JyH0txx"/>
+  <img src="https://i.ibb.co/YyTHy6z/ss3.png" />
     
     
-### Admin Panel
-  - Admin Page
-  <img src="https://i.ibb.co/qWLh5bb/image.png" />
-  
-  - Delete User
-  <img src="https://i.ibb.co/3fzsFhN/image.png" />
-  
-  - See User Details
-  <img src="https://i.ibb.co/TMHVGV0/image.png" />
-  
-  - Edit User
-  <img src="https://i.ibb.co/8Db47JJ/image.png" />
-  
-  - Logout User
-  <img src="https://i.ibb.co/nn9HnY2/image.png" />
+
   
 
 
