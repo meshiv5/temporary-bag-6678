@@ -27,13 +27,13 @@ Shivendra
 ## Authentication
   - Home Page & Video Pages
   
-  - Responsiveness
+  - Home
   <img src="https://i.ibb.co/kmD1GGb/ss1.png"/>
   
-  - Home
+  - Video
   <img src="https://i.ibb.co/2sdmh88/ss2.png" />
   
-  - Video
+  - Responsiveness
   <img src="https://i.ibb.co/YyTHy6z/ss3.png" />
     
     
